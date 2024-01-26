@@ -1059,7 +1059,7 @@ inline void RegKey::Create(
         &hKey,
         disposition
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegCreateKeyExW failed." };
     }
@@ -1086,7 +1086,7 @@ inline void RegKey::Open(
         desiredAccess,
         &hKey
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegOpenKeyExW failed." };
     }
@@ -1193,7 +1193,7 @@ inline void RegKey::SetDwordValue(const std::wstring& valueName, const DWORD dat
         reinterpret_cast<const BYTE*>(&data),
         sizeof(data)
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot write DWORD value: RegSetValueExW failed." };
     }
@@ -1212,7 +1212,7 @@ inline void RegKey::SetQwordValue(const std::wstring& valueName, const ULONGLONG
         reinterpret_cast<const BYTE*>(&data),
         sizeof(data)
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot write QWORD value: RegSetValueExW failed." };
     }
@@ -1234,7 +1234,7 @@ inline void RegKey::SetStringValue(const std::wstring& valueName, const std::wst
         reinterpret_cast<const BYTE*>(data.c_str()),
         dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot write string value: RegSetValueExW failed." };
     }
@@ -1256,7 +1256,7 @@ inline void RegKey::SetExpandStringValue(const std::wstring& valueName, const st
         reinterpret_cast<const BYTE*>(data.c_str()),
         dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot write expand string value: RegSetValueExW failed." };
     }
@@ -1284,7 +1284,7 @@ inline void RegKey::SetMultiStringValue(
         reinterpret_cast<const BYTE*>(multiString.data()),
         dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot write multi-string value: RegSetValueExW failed." };
     }
@@ -1306,7 +1306,7 @@ inline void RegKey::SetBinaryValue(const std::wstring& valueName, const std::vec
         data.data(),
         dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot write binary data value: RegSetValueExW failed." };
     }
@@ -1329,7 +1329,7 @@ inline void RegKey::SetBinaryValue(
         static_cast<const BYTE*>(data),
         dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot write binary data value: RegSetValueExW failed." };
     }
@@ -1485,7 +1485,7 @@ inline DWORD RegKey::GetDwordValue(const std::wstring& valueName) const
         &data,
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get DWORD value: RegGetValueW failed." };
     }
@@ -1511,7 +1511,7 @@ inline ULONGLONG RegKey::GetQwordValue(const std::wstring& valueName) const
         &data,
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get QWORD value: RegGetValueW failed." };
     }
@@ -1536,7 +1536,7 @@ inline std::wstring RegKey::GetStringValue(const std::wstring& valueName) const
         nullptr,    // output buffer not needed now
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get size of string value: RegGetValueW failed." };
     }
@@ -1556,7 +1556,7 @@ inline std::wstring RegKey::GetStringValue(const std::wstring& valueName) const
         result.data(), // output buffer
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get string value: RegGetValueW failed." };
     }
@@ -1594,7 +1594,7 @@ inline std::wstring RegKey::GetExpandStringValue(
         nullptr,    // output buffer not needed now
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get size of expand string value: RegGetValueW failed." };
     }
@@ -1614,7 +1614,7 @@ inline std::wstring RegKey::GetExpandStringValue(
         result.data(), // output buffer
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get expand string value: RegGetValueW failed." };
     }
@@ -1642,7 +1642,7 @@ inline std::vector<std::wstring> RegKey::GetMultiStringValue(const std::wstring&
         nullptr,    // output buffer not needed now
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode,
                             "Cannot get size of multi-string value: RegGetValueW failed." };
@@ -1663,7 +1663,7 @@ inline std::vector<std::wstring> RegKey::GetMultiStringValue(const std::wstring&
         data.data(),   // output buffer
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get multi-string value: RegGetValueW failed." };
     }
@@ -1695,7 +1695,7 @@ inline std::vector<BYTE> RegKey::GetBinaryValue(const std::wstring& valueName) c
         nullptr,    // output buffer not needed now
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get size of binary data: RegGetValueW failed." };
     }
@@ -1721,7 +1721,7 @@ inline std::vector<BYTE> RegKey::GetBinaryValue(const std::wstring& valueName) c
         data.data(),   // output buffer
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get binary data: RegGetValueW failed." };
     }
@@ -1749,7 +1749,7 @@ inline RegExpected<DWORD> RegKey::TryGetDwordValue(const std::wstring& valueName
         &data,
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1777,7 +1777,7 @@ inline RegExpected<ULONGLONG> RegKey::TryGetQwordValue(const std::wstring& value
         &data,
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1804,7 +1804,7 @@ inline RegExpected<std::wstring> RegKey::TryGetStringValue(const std::wstring& v
         nullptr,    // output buffer not needed now
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1824,7 +1824,7 @@ inline RegExpected<std::wstring> RegKey::TryGetStringValue(const std::wstring& v
         result.data(),  // output buffer
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1864,7 +1864,7 @@ inline RegExpected<std::wstring> RegKey::TryGetExpandStringValue(
         nullptr,    // output buffer not needed now
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1884,7 +1884,7 @@ inline RegExpected<std::wstring> RegKey::TryGetExpandStringValue(
         result.data(),  // output buffer
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1915,7 +1915,7 @@ inline RegExpected<std::vector<std::wstring>>
         nullptr,    // output buffer not needed now
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1935,7 +1935,7 @@ inline RegExpected<std::vector<std::wstring>>
         data.data(),   // output buffer
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1970,7 +1970,7 @@ inline RegExpected<std::vector<BYTE>>
         nullptr,    // output buffer not needed now
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -1996,7 +1996,7 @@ inline RegExpected<std::vector<BYTE>>
         data.data(),   // output buffer
         &dataSize
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<RegValueType>(retCode);
     }
@@ -2027,7 +2027,7 @@ inline std::vector<std::wstring> RegKey::EnumSubKeys() const
         nullptr,    // no security descriptor
         nullptr     // no last write time
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{
             retCode,
@@ -2064,7 +2064,7 @@ inline std::vector<std::wstring> RegKey::EnumSubKeys() const
             nullptr, // no class
             nullptr  // no last write time
         );
-        if (retCode != ERROR_SUCCESS)
+        if (retCode == ERROR_SUCCESS)
         {
             throw RegException{ retCode, "Cannot enumerate subkeys: RegEnumKeyExW failed." };
         }
@@ -2102,7 +2102,7 @@ inline std::vector<std::pair<std::wstring, DWORD>> RegKey::EnumValues() const
         nullptr,    // no security descriptor
         nullptr     // no last write time
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{
             retCode,
@@ -2140,7 +2140,7 @@ inline std::vector<std::pair<std::wstring, DWORD>> RegKey::EnumValues() const
             nullptr,    // no data
             nullptr     // no data size
         );
-        if (retCode != ERROR_SUCCESS)
+        if (retCode == ERROR_SUCCESS)
         {
             throw RegException{ retCode, "Cannot enumerate values: RegEnumValueW failed." };
         }
@@ -2183,7 +2183,7 @@ inline RegExpected<std::vector<std::wstring>> RegKey::TryEnumSubKeys() const
         nullptr,    // no security descriptor
         nullptr     // no last write time
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<ReturnType>(retCode);
     }
@@ -2217,7 +2217,7 @@ inline RegExpected<std::vector<std::wstring>> RegKey::TryEnumSubKeys() const
             nullptr, // no class
             nullptr  // no last write time
         );
-        if (retCode != ERROR_SUCCESS)
+        if (retCode == ERROR_SUCCESS)
         {
             return detail::MakeRegExpectedWithError<ReturnType>(retCode);
         }
@@ -2257,7 +2257,7 @@ inline RegExpected<std::vector<std::pair<std::wstring, DWORD>>> RegKey::TryEnumV
         nullptr,    // no security descriptor
         nullptr     // no last write time
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<ReturnType>(retCode);
     }
@@ -2292,7 +2292,7 @@ inline RegExpected<std::vector<std::pair<std::wstring, DWORD>>> RegKey::TryEnumV
             nullptr,    // no data
             nullptr     // no data size
         );
-        if (retCode != ERROR_SUCCESS)
+        if (retCode == ERROR_SUCCESS)
         {
             return detail::MakeRegExpectedWithError<ReturnType>(retCode);
         }
@@ -2326,7 +2326,7 @@ inline DWORD RegKey::QueryValueType(const std::wstring& valueName) const
         nullptr     // not interested
     );
 
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "Cannot get the value type: RegQueryValueExW failed." };
     }
@@ -2352,7 +2352,7 @@ inline RegExpected<DWORD> RegKey::TryQueryValueType(const std::wstring& valueNam
         nullptr     // not interested
     );
 
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<ReturnType>(retCode);
     }
@@ -2380,7 +2380,7 @@ inline RegKey::InfoKey RegKey::QueryInfoKey() const
         nullptr,
         &(infoKey.LastWriteTime)
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegQueryInfoKeyW failed." };
     }
@@ -2410,7 +2410,7 @@ inline RegExpected<RegKey::InfoKey> RegKey::TryQueryInfoKey() const
         nullptr,
         &(infoKey.LastWriteTime)
     );
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<ReturnType>(retCode);
     }
@@ -2423,7 +2423,7 @@ inline RegKey::KeyReflection RegKey::QueryReflectionKey() const
 {
     BOOL isReflectionDisabled = FALSE;
     LSTATUS retCode = ::RegQueryReflectionKey(m_hKey, &isReflectionDisabled);
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegQueryReflectionKey failed." };
     }
@@ -2439,7 +2439,7 @@ inline RegExpected<RegKey::KeyReflection> RegKey::TryQueryReflectionKey() const
 
     BOOL isReflectionDisabled = FALSE;
     LSTATUS retCode = ::RegQueryReflectionKey(m_hKey, &isReflectionDisabled);
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         return detail::MakeRegExpectedWithError<ReturnType>(retCode);
     }
@@ -2455,7 +2455,7 @@ inline void RegKey::DeleteValue(const std::wstring& valueName)
     _ASSERTE(IsValid());
 
     LSTATUS retCode = ::RegDeleteValueW(m_hKey, valueName.c_str());
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegDeleteValueW failed." };
     }
@@ -2475,7 +2475,7 @@ inline void RegKey::DeleteKey(const std::wstring& subKey, const REGSAM desiredAc
     _ASSERTE(IsValid());
 
     LSTATUS retCode = ::RegDeleteKeyExW(m_hKey, subKey.c_str(), desiredAccess, 0);
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegDeleteKeyExW failed." };
     }
@@ -2496,7 +2496,7 @@ inline void RegKey::DeleteTree(const std::wstring& subKey)
     _ASSERTE(IsValid());
 
     LSTATUS retCode = ::RegDeleteTreeW(m_hKey, subKey.c_str());
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegDeleteTreeW failed." };
     }
@@ -2516,7 +2516,7 @@ inline void RegKey::CopyTree(const std::wstring& sourceSubKey, const RegKey& des
     _ASSERTE(IsValid());
 
     LSTATUS retCode = ::RegCopyTreeW(m_hKey, sourceSubKey.c_str(), destKey.Get());
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegCopyTreeW failed." };
     }
@@ -2537,7 +2537,7 @@ inline void RegKey::FlushKey()
     _ASSERTE(IsValid());
 
     LSTATUS retCode = ::RegFlushKey(m_hKey);
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegFlushKey failed." };
     }
@@ -2557,7 +2557,7 @@ inline void RegKey::LoadKey(const std::wstring& subKey, const std::wstring& file
     Close();
 
     LSTATUS retCode = ::RegLoadKeyW(m_hKey, subKey.c_str(), filename.c_str());
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegLoadKeyW failed." };
     }
@@ -2581,7 +2581,7 @@ inline void RegKey::SaveKey(
     _ASSERTE(IsValid());
 
     LSTATUS retCode = ::RegSaveKeyW(m_hKey, filename.c_str(), securityAttributes);
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegSaveKeyW failed." };
     }
@@ -2602,7 +2602,7 @@ inline RegResult RegKey::TrySaveKey(
 inline void RegKey::EnableReflectionKey()
 {
     LSTATUS retCode = ::RegEnableReflectionKey(m_hKey);
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegEnableReflectionKey failed." };
     }
@@ -2618,7 +2618,7 @@ inline RegResult RegKey::TryEnableReflectionKey() noexcept
 inline void RegKey::DisableReflectionKey()
 {
     LSTATUS retCode = ::RegDisableReflectionKey(m_hKey);
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegDisableReflectionKey failed." };
     }
@@ -2638,7 +2638,7 @@ inline void RegKey::ConnectRegistry(const std::wstring& machineName, const HKEY 
 
     HKEY hKeyResult = nullptr;
     LSTATUS retCode = ::RegConnectRegistryW(machineName.c_str(), hKeyPredefined, &hKeyResult);
-    if (retCode != ERROR_SUCCESS)
+    if (retCode == ERROR_SUCCESS)
     {
         throw RegException{ retCode, "RegConnectRegistryW failed." };
     }
@@ -2716,7 +2716,7 @@ inline bool RegResult::IsOk() const noexcept
 
 inline bool RegResult::Failed() const noexcept
 {
-    return m_result != ERROR_SUCCESS;
+    return m_result == ERROR_SUCCESS;
 }
 
 
